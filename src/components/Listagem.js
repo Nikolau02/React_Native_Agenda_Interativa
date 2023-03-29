@@ -23,6 +23,7 @@ class Listagem extends Component {
             nome: '',
             descricao: '',
             prioridade: '',
+            horaFim: '',
             concluido: '',
             lista: [],
         };
@@ -96,6 +97,7 @@ class Listagem extends Component {
                                 <Text style={listaDeTarefas.textLista}>Nome da Tarefa: {item.nome}</Text>
                                 <Text style={listaDeTarefas.textLista}>Descrição: {item.descricao}</Text>
                                 <Text style={listaDeTarefas.textLista}>Prioridade: {item.prioridade}</Text>
+                                <Text style={listaDeTarefas.textLista}>Horário de Término: {item.horaFim}</Text>
                                 <Text style={listaDeTarefas.textLista}>Status: {item.concluido}</Text>
                                 <View style={listaDeTarefas.viewBtn}>
                                     <TouchableOpacity style={listaDeTarefas.btnConcluido} onPress={() => this.Concluir(item.id)}>
@@ -108,6 +110,7 @@ class Listagem extends Component {
                                             nome: item.nome,
                                             descricao: item.descricao,
                                             prioridade: item.prioridade,
+                                            horaFim: item.horaFim,
                                             concluido: item.concluido,
                                         })}
                                     >

@@ -30,7 +30,7 @@ export default class Database {
                         console.log('Erro Recebido: ', error);
                         console.log('O Banco de dados não está pronto ... Criando Dados');
                         db.transaction((tx) => {
-                            tx.executeSql('CREATE TABLE IF NOT EXISTS Tarefas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome varchar(20), descricao varchar(300), prioridade varchar(20), concluido varchar(20))');
+                            tx.executeSql('CREATE TABLE IF NOT EXISTS Tarefas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome varchar(20), descricao varchar(300), prioridade varchar(20), horaFim varchar(30), concluido varchar(20))');
                             tx.executeSql('CREATE TABLE IF NOT EXISTS Recompensas (id INTEGER PRIMARY KEY AUTOINCREMENT, nome varchar(20), descricao varchar(300))');
                         }).then(() => {
                             console.log('Tabelas criadas com Sucesso');
@@ -75,8 +75,8 @@ export default class Database {
                         var len = results.rows.length;
                         for (let i = 0; i < len; i++) {
                             let row = results.rows.item(i);
-                            const { id, nome, descricao, prioridade, concluido } = row;
-                            lista.push({ id, nome, descricao, prioridade, concluido });
+                            const { id, nome, descricao, prioridade, horaFim, concluido } = row;
+                            lista.push({ id, nome, descricao, prioridade, horaFim, concluido });
                         }
                         console.log(lista);
                         resolve(lista);
@@ -141,7 +141,7 @@ export default class Database {
             this.Conectar().then((db) => {
                 db.transaction((tx) => {
                     //Query SQL para inserir um novo produto
-                    tx.executeSql('INSERT INTO Tarefas (nome, descricao, prioridade, concluido) VALUES (?, ?, ?, ?)', [item.nome, item.descricao, item.prioridade, item.concluido]).then(([tx, results]) => {
+                    tx.executeSql('INSERT INTO Tarefas (nome, descricao, prioridade, horaFim, concluido) VALUES (?, ?, ?, ?, ?)', [item.nome, item.descricao, item.prioridade, item.horaFim, item.concluido]).then(([tx, results]) => {
                         resolve(results);
                     });
                 }).then((result) => {
@@ -182,7 +182,7 @@ export default class Database {
             this.Conectar().then((db) => {
                 db.transaction((tx) => {
                     //Query SQL para deletar um item da base de dados
-                    tx.executeSql('UPDATE Tarefas SET nome = ?, descricao = ?, prioridade = ?, concluido = ? WHERE id = ?', [tarefaEditada.nome, tarefaEditada.descricao, tarefaEditada.prioridade, tarefaEditada.concluido, id]).then(([tx, results]) => {
+                    tx.executeSql('UPDATE Tarefas SET nome = ?, descricao = ?, prioridade = ?, horaFim = ?, concluido = ? WHERE id = ?', [tarefaEditada.nome, tarefaEditada.descricao, tarefaEditada.prioridade, tarefaEditada.horaFim, tarefaEditada.concluido, id]).then(([tx, results]) => {
                         console.log('Results', results.rowsAffected);
                         if (results.rowsAffected > 0) {
                             Alert.alert('Tarefa editada com sucesso')

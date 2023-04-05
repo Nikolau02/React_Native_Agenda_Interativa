@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
-import { Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, ToastAndroid, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 
+// Páginas e Serviços
 import { forms } from '../styles';
 import Database from '../databaseS/database';
 import Recompensa from '../models/recompensa';
@@ -10,21 +11,24 @@ const db = new Database();
 
 export default function EditRecompensa({ route, navigation }) {
 
+    // States
     const [id, setId] = useState('');
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
     
+    // Atualizando States com os dados vindos de Listagem.js
     useEffect(() => {
         setId(route.params.id);
         setNome(route.params.nome);
         setDescricao(route.params.descricao);
     }, []);
 
+    // Função anônima de edição de recompensas
     let editar = (id, nome, descricao) => {
         const recEditada = new Recompensa(nome, descricao);
         db.EdicaoRec(id, recEditada);
+        ToastAndroid.show("Recompensa editada com sucesso", ToastAndroid.SHORT);
         navigation.navigate('Home');
-        //ToastAndroid.show("Recompensa editada com sucesso", ToastAndroid.SHORT);
     }
 
     return (

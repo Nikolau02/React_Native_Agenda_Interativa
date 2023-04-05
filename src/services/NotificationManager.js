@@ -1,7 +1,10 @@
 import PushNotification from "react-native-push-notification";
-import Database from '../databaseS/database';
 
 class NotificationManager {
+
+    setNavigation = (novoNavegador) => {
+        navegador = novoNavegador;
+    }
 
     // Configuração orientada pela documentação do React Native Push Notification
     // Essa configuração garante o funcionamento da biblioteca no Android e no iOS
@@ -12,6 +15,7 @@ class NotificationManager {
             },
             onNotification: function (notification) {
                 console.log("[NotificationManager] onNotification:", notification);
+                //navegador.navigate("Lista Diária");
             },
         })
     }
@@ -54,6 +58,10 @@ class NotificationManager {
         PushNotification.cancelAllLocalNotifications();
     }
 
+    cancelOneLocalNotification = (id) => {
+        PushNotification.cancelLocalNotification(id);
+    }
+
     createChannel = () => {
         PushNotification.createChannel(
             {
@@ -65,19 +73,22 @@ class NotificationManager {
         );
     }
 
-    scheduleNotification = (nome, horaFim) => {
+    scheduleNotification = (id, nome, horaCompleta) => {
 
         PushNotification.localNotificationSchedule({
             //... You can use all the options from localNotifications
-            id: 1,
-            title: "Aviso de término de tarefa",
+            id: id,
+            title: "Aviso de término de tarefa.",
             message: "Parece que acabou o tempo pra realizar a tarefa: " + nome, // EXEMPLOOOOO
-            date: new Date(horaFim), // primeira notificação
+            date: new Date(horaCompleta), // primeira notificação
             allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
             channelId: "my-channel" // (required)
         }
         );
+    }
 
+    cancelNotif() {
+        PushNotification.cancelLocalNotification(this.lastId);
     }
 
 }

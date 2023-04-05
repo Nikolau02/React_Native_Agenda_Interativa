@@ -2,17 +2,22 @@
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { listaDeRecompensas } from '../styles/index';
-import Database from '../databaseS/database';
 
+// Bibliotecas
 import Icon from 'react-native-vector-icons/Ionicons';
 import MyIcon from 'react-native-vector-icons/MaterialIcons';
 
+// Páginas e Serviços
+import { listaDeRecompensas } from '../styles/index';
+import Database from '../databaseS/database';
+
 export default class ListagemRec extends Component {
 
+    // States
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             nome: '',
             descricao: '',
             lista: [],
@@ -51,7 +56,7 @@ export default class ListagemRec extends Component {
                 {
                     this.state.lista.map(
                         item => (
-                            <View style={listaDeRecompensas.viewLista}>
+                            <View key={item.id} style={listaDeRecompensas.viewLista}>
                                 <Text style={listaDeRecompensas.textLista}>Nome da Recompensa: {item.nome}</Text>
                                 <Text style={listaDeRecompensas.textLista}>Descrição: {item.descricao}</Text>
                                 <View style={listaDeRecompensas.viewBtn}>

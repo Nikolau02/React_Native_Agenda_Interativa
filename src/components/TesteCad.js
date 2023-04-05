@@ -1,112 +1,144 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from 'react';
-import { Text, ScrollView, TextInput, TouchableOpacity, View, Button } from 'react-native';
-import { notificationManager } from '../services/NotificationManager';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import React, { Component } from 'react';
+import { Text, ScrollView, TextInput, TouchableOpacity, ToastAndroid, View } from 'react-native';
 
+// Bibliotecas
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+// Páginas e Serviços
 import { forms } from '../styles';
 import Database from '../databaseS/database';
 import Tarefa from '../models/tarefa';
 
-export default function Teste({ navigation }) {
 
-    const notificador = notificationManager;
+class Teste12 extends Component {
 
-    // Criação dos States
-    const [nome, setNome] = useState('');
-    const [descricao, setDescricao] = useState('');
-    const [prioridade, setPrioridade] = useState('');
-    const [horaFim, setHoraFim] = useState(new Date());
-    const [concluido, setConcluido] = useState('Não Realizado');
-    const [showPicker, setShowPicker] = useState(false);
+    // States
+    constructor(props) {
+        super(props);
+        this.state = {
+            nome: '',
+            descricao: '',
+            prioridade: '',
+            horaCompleta: new Date(),
+            concluido: '',
+            notifId: 0,
+            showPicker: false
+        };
 
-    const showMode = () => {
+        this.TestarConexao();
+    }
+
+    // Funções anõnimas para chamada dos métodos das Tarefas
+    TestarConexao = () => {
+        const db = new Database();
+        db.Conectar();
+    };
+
+    Cadastrar = (nome, descricao, prioridade, horaCompleta, concluido, notifId) => {
+        horaCompleta.setSeconds(0, 0);
+        const horaFormatada = new Intl.DateTimeFormat('pt-br', {
+            hour: 'numeric',
+            minute: 'numeric'
+        }).format(horaCompleta);
+        console.log(horaFormatada);
+        const { navegacao } = this.props;
+        const db = new Database();
+        const novaTarefa = new Tarefa(nome, descricao, prioridade, horaCompleta, horaFormatada, concluido, notifId);
+        db.Adicionar(novaTarefa);
+        ToastAndroid.show("Tarefa adicionada!", ToastAndroid.SHORT);
+        navegacao.navigate('Home');
+    };
+
+    // Função para mostrar o seletor de hora após o toque
+    ShowMode = () => {
         if (Platform.OS === 'android') {
-            setShowPicker(true);
+            this.setState({ showPicker: true });
             // for iOS, add a button that closes the picker
         }
     };
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate;
-        setShowPicker(false);
-        setHoraFim(currentDate);
+    // Função de seleção de hora
+    OnChange = (event, selectedDate) => {
+        this.setState({ showPicker: false });
+        this.setState({ horaCompleta: selectedDate });
     };
 
-    /*useEffect(() => {
-        notificador.configure();
-        notificador.createChannel();
-    });*/
+    render() {
+        const showPicker = this.state.showPicker;
 
-    let cadastrar = (nome, descricao, prioridade, horaFim, concluido) => {
-        const dataFormat = Intl.DateTimeFormat('pt-br', {
-            hour: 'numeric',
-            minute: 'numeric'
-        })
-        dataFormat.format(horaFim);
-        console.log("---------Resultado da Variável horaFim: " + horaFim)
-        const db = new Database();
-        const novaTarefa = new Tarefa(nome, descricao, prioridade, horaFim, concluido);
-        db.Adicionar(novaTarefa);
-        //notificador.scheduleNotification();
-        navigation.navigate('Home');
-    };
-    return (
-        <ScrollView>
-            <Text style={forms.titulo}>Cadastrar Tarefa</Text>
-            <Text />
-            <Text style={forms.text}>Nome da Tarefa</Text>
-            <TextInput
-                style={forms.textInputTar}
-                onChangeText={
-                    (text) => setNome(text)
-                }
-            />
-            <Text />
-            <Text style={forms.text}>Descrição da Tarefa</Text>
-            <TextInput
-                style={forms.textInputTar}
-                onChangeText={
-                    (text) => setDescricao(text)
-                }
-                multiline={true}
-                numberOfLines={4}
-            />
-            <Text />
-            <Text style={forms.text}>Prioridade</Text>
-            <TextInput
-                style={forms.textInputTar}
-                onChangeText={
-                    (text) => setPrioridade(text)
-                }
-            />
-            <Text />
-            <Text style={forms.text}>Horário de Término da Tarefa</Text>
-            <Button onPress={showMode} title="Selecionar Horário de Término" />
-            {showPicker && (
-                <DateTimePicker
-                    testID="dateTimePicker"
-                    value={new Date()}
-                    mode='time'
-                    onChange={onChange}
+        return (
+            <ScrollView>
+                <Text style={forms.titulo}>Cadastrar Tarefa:</Text>
+                <Text />
+                <Text style={forms.text}>Nome da Tarefa</Text>
+                <TextInput
+                    style={forms.textInputTar}
+                    onChangeText={textoDigitado =>
+                        this.setState({ nome: textoDigitado })
+                    }
                 />
-            )}
-            {/*<Text>Horário Selecionado: {horaFim.toLocaleString()}</Text>*/}
-            <Text />
-            <TouchableOpacity
-                style={forms.btnCadTarefas}
-                onPress={() => cadastrar(
-                    nome,
-                    descricao,
-                    prioridade,
-                    horaFim,
-                    concluido
-                )
-                }
-            >
-                <Text style={forms.btnTarefasText}>Cadastrar</Text>
-            </TouchableOpacity>
-        </ScrollView>
-    );
+                <Text />
+                <Text style={forms.text}>Descrição da Tarefa</Text>
+                <TextInput
+                    style={forms.textInputTar}
+                    onChangeText={textoDigitado =>
+                        this.setState({ descricao: textoDigitado })
+                    }
+                    multiline={true}
+                    numberOfLines={4}
+                />
+                <Text />
+                <Text style={forms.text}>Prioridade</Text>
+                <TextInput
+                    style={forms.textInputTar}
+                    onChangeText={textoDigitado =>
+                        this.setState({ prioridade: textoDigitado })
+                    }
+                />
+                <Text />
+                <Text style={forms.text}>Horário de Término da Tarefa</Text>
+                <View style={forms.viewBtn}>
+                    <TouchableOpacity style={forms.btnRelogio} onPress={() => this.ShowMode()}>
+                        <Icon name="clock" size={70} color="#ffffff" />
+                    </TouchableOpacity>
+                </View>
+                {/*<Button onPress={() => this.ShowMode()} title="Selecionar Horário de Término" />*/}
+                {showPicker && (
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        value={new Date()}
+                        mode='time'
+                        onChange={this.OnChange}
+                    />
+                )}
+                {/*<Text>Horário Selecionado: {horaFim.toLocaleString()}</Text>*/}
+                <Text />
+                <TouchableOpacity
+                    style={forms.btnCadTarefas}
+                    onPress={() => {
+                        this.Cadastrar(
+                            this.state.nome,
+                            this.state.descricao,
+                            this.state.prioridade,
+                            this.state.horaCompleta,
+                            this.state.concluido,
+                            this.state.notifId
+                        );
+                    }}
+                >
+                    <Text style={forms.btnTarefasText}>Cadastrar</Text>
+                </TouchableOpacity>
+            </ScrollView>
+        );
+    }
 
+}
+
+export default function Teste(props) {
+    const navigation = useNavigation();
+
+    return <ScrollView><Teste12 {...props} navegacao={navigation} /></ScrollView>;
 }

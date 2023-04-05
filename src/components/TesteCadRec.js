@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
-import { Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, ToastAndroid, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 
+// Páginas e Serviços
 import { forms } from '../styles';
 import Database from '../databaseS/database';
 import Recompensa from '../models/recompensa';
@@ -18,6 +19,7 @@ export default function TesteRec({ navigation }) {
         const db = new Database();
         const novaRecompensa = new Recompensa(nome, descricao);
         db.AdicionarRec(novaRecompensa);
+        ToastAndroid.show("Recompensa criada", ToastAndroid.SHORT);
         navigation.navigate('Home');
     };
 

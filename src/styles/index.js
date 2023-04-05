@@ -92,6 +92,7 @@ const forms = StyleSheet.create({
         alignSelf: 'center',
         marginTop: 10,
         borderRadius: 2,
+        marginBottom: 10,
     },
     btnTarefasText: {
         fontSize: 20,
@@ -113,12 +114,28 @@ const forms = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         marginTop: 10,
+        marginBottom: 10,
     },
     btnRecompensasText: {
         fontSize: 20,
         fontWeight: 'bold',
         color: '#ffffff',
         margin: 7,
+    },
+    btnRelogio: {
+        width: 85,
+        height: 85,
+        backgroundColor: '#65ADFF',
+        borderRadius: 85,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10,
+    },
+    viewBtn: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     text: {
         fontSize: 20,
@@ -153,8 +170,6 @@ const listaDeTarefas = StyleSheet.create({
         alignSelf: 'center',
     },
     barraDeProgresso: {
-        backgroundColor: '#cccccc',
-        height: 15,
         borderRadius: 15,
         alignSelf: 'center'
     },
@@ -187,6 +202,24 @@ const listaDeTarefas = StyleSheet.create({
         margin: 10,
     },
     btnExcluir: {
+        width: 40,
+        height: 40,
+        backgroundColor: '#ff4747',
+        borderRadius: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10,
+    },
+    btnNotificacoes: {
+        width: 40,
+        height: 40,
+        backgroundColor: '#65ADFF',
+        borderRadius: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10,
+    },
+    btnCancelNotif: {
         width: 40,
         height: 40,
         backgroundColor: '#ff4747',

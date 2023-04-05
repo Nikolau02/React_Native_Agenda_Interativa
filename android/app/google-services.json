@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "423195353440",
+    "project_id": "agenda-interativa-c74c6",
+    "storage_bucket": "agenda-interativa-c74c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423195353440:android:92d68372e1b60b4171fe05",
+        "android_client_info": {
+          "package_name": "com.gerenciadorderecompensasm4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423195353440-osp521sjqvv1f2s1152jgi0ilgj0mc27.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZAX3avfkKWyIZkF_nm_rd4AniBRTXfaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423195353440-osp521sjqvv1f2s1152jgi0ilgj0mc27.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -148,7 +148,6 @@ class Listagem extends Component {
                                 <Text style={listaDeTarefas.textLista}>Prioridade: {item.prioridade}</Text>
                                 <Text style={listaDeTarefas.textLista}>Horário de Término: {item.horaFormatada}</Text>
                                 <Text style={listaDeTarefas.textLista}>Status: {item.concluido}</Text>
-                                <Text style={listaDeTarefas.textLista}>NotifId: {item.notifId}</Text>
                                 <View style={listaDeTarefas.viewBtn}>
                                     <TouchableOpacity style={listaDeTarefas.btnConcluido} onPress={() => this.Concluir(item.id)}>
                                         <Icon name="checkmark-sharp" size={30} color="#ffffff" />

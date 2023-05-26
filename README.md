@@ -17,4 +17,3 @@ afazeres de cada dia, sem deixar de lado um merecido descanso.
 No App Agenda Interativa você pode marcar como concluidas as tarefas já terminadas e acompanhar
 seu progresso diário.
 
-![Gif_Agenda_Interativa](Gif_Agenda_Interativa.gif)

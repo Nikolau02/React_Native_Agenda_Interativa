@@ -6,6 +6,8 @@ O App "Agenda Interativa" é basicamente uma aplicação para organização de t
 nela o usuário pode cadastrar as tarefas que tem pra realizar durante o dia, e também pode cadastrar
 suas "Recompensas" diárias, que virão após o término das tarefas, assim fica mais fácil organizar os
 afazeres de cada dia, sem deixar de lado um merecido descanso.
+Essa aplicação foi feita como um Projeto pessoal para a aplicação dos conhecimentos de desenvolvimento 
+mobile do curso Técnico em Informática para a Internet.
 
 ## Instalação
 1. Baixe o arquivo .zip do Projeto.

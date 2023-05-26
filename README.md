@@ -14,4 +14,6 @@ afazeres de cada dia, sem deixar de lado um merecido descanso.
 4. Rode o projeto e confira.
 
 ## Uso
-
+No App Agenda Interativa você pode marcar como concluidas as tarefas já terminadas e acompanhar
+seu progresso diário.
+![Demonstrar](https://github.com/Nikolau02/React_Native_Agenda_Interativa/edit/master/Gif_Agenda_Interativa.mp4)

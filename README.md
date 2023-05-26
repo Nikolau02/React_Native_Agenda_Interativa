@@ -10,7 +10,7 @@ afazeres de cada dia, sem deixar de lado um merecido descanso.
 ## Instalação
 1. Baixe o arquivo .zip do Projeto.
 2. Extraia o projeto e abra no seu editor de código-fonte.
-3. Execute no terminal o comando `$ npm install` para a instalação de todos os pacotes do projeto.
+3. Execute no terminal o comando `npm install` para a instalação de todos os pacotes do projeto.
 4. Rode o projeto e confira.
 
 ## Uso

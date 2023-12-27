@@ -1,4 +1,6 @@
 # React_Native_Agenda_Interativa
+![Badge de Encerrado](https://img.shields.io/badge/status-Encerrado-red)
+
 Repositório para ao versionamento do App "Agenda Interativa" destinado à organização de tarefas diárias.
 
 ## Descrição
